@@ -1,5 +1,8 @@
 from osmread import parse_file, Way, Node
 import math
+import msql
+
+CRIMES = msql.pull()
 
 class MapNode:
     def __init__(self, id, lat, lon):
