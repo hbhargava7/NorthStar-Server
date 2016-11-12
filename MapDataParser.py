@@ -41,9 +41,7 @@ def getNodesAndEdges():
             path = entity.nodes
             for i in range(len(path)-1):
                 dist = euclid((nodes[path[i]].lon,nodes[path[i]].lat),(nodes[path[i+1]].lon,nodes[path[i+1]].lat))
-                print(dist)
                 edge = Edge(nodes[path[i]], nodes[path[i + 1]], dist)
-
                 if path[i] in edges:
                     edges[path[i]].append(edge)
                 else:
