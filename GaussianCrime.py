@@ -23,8 +23,8 @@ def CrimeDensity(point, crimes):
 
 # Find the euclidean distance between 2 points (lat, lon)
 def distance(p1, p2):
-    x = p1[0] - p2[0]
-    y = p1[1] - p2[1]
+    y = p1[0] - p2[0]
+    x = p1[1] - p2[1]
     return sqrt(x*x + y*y)
 
 
