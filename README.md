@@ -5,5 +5,9 @@ Configuration
 ------------
 This project was developed using `virtualenv` to manage Python dependencies. Environment can be initialized from the root directory by:
 ```
-source venv/bin/activate
+source virtualenvironment/bin/activate
 ```
+To exit the virtual environment:
+```
+deactivate
+'''
