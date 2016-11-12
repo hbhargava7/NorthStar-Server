@@ -1,6 +1,6 @@
 from MapDataParser import euclid
 import MapDataParser, math, sys
-import heapq
+import Utils
 
 distWeight = 1
 riskWeight = 1
@@ -10,20 +10,15 @@ nodes = data[0]
 edges = data[1]
 
 class SearchNode:
-    def __init__(self, node, end, prev=None):
+    def __init__(self, node, goal, prev=None, cost=0):
         self.node = node
-        self.toEnd = MapDataParser.euclid(node.point, end)
+        self.cost = cost
         self.prev = prev
+        self.goal = goal
 
     # BELOW IS ALL HEURISTICS HANDLING
-    def __lt__(self, other):
-        return
-    def __gt__(self, other):
-        return
-    def __eq__(self, other):
-        return
-    def __ne__(self, other):
-        return
+    def isGoalState(self):
+        return self.node.id == self.goal.id
 
 def route(p1, p2):
     startNode, endNode = None, None
@@ -39,26 +34,36 @@ def route(p1, p2):
             bestDistFromEnd = distFromEnd
     return findPath(startNode, endNode)
 
-def findPath(start, end):
-    path = []
-    heap = []
-    n = 0
-    for i in range(0, len(nodes)):
-        if nodes[i] == start:
-            n = i
-            break
-    for edge in edges[n]:
-        heapq.heappush(heap, edge)
-    while heap != [] or path[len(path) - 1] != end:
-        toAdd = (heapq.heappop(heap))
-        path.append(toAdd)
-        for edge in edges[findChildren(toAdd.node_to)]:
-            heapq.heappush(heap, edge)
+def findPath(start, goal):
+    visited = []
+    curr = start
+    fringe = util.PriorityQueue()
+    fringe.push(curr, 0)
+    while True:
+        if fringe.isEmpty():
+            return []
+        curr = fringe.pop()
+        if curr == goal:
+            return createPath(curr)
+        if curr.node not in visited:
+            visited.append(curr.node)
+            children = edges[node.id]
+            if children:
+                for e in children:
+                    cost = e.dist + curr.cost
+                    node = SearchNode(e.end, goal, curr, cost)
+                    fringe.push(node, node.cost + Utils.euclid(curr.point, goal.point))
 
+def createPath(node):
+    path = []
+    curr = node
+    while curr.prev:
+        path.append(curr.move)
+        curr = curr.prev
+    path.reverse()
     return path
 
-def findChildren(node):
-    for i in range(0, len(nodes)):
-        if nodes[i] == node:
-            return i
+start = (37.86979719999999, -122.2675821)
+goal = (37.8760221, -122.2588018)
 
+print (route(start, goal))

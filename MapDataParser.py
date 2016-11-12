@@ -17,8 +17,9 @@ class Edge:
         self.start = node_from
         self.end = node_to
         self.dist = Utils.euclid(self.start.point, self.end.point)
-        self.risk = Utils.CrimeDensity(self.start.point, self.closeCrimes())
-        print (self.risk)
+        # self.risk = Utils.CrimeDensity(self.start.point, self.closeCrimes())
+        # print (self.risk)
+        self.risk = 0
 
     def norm(self):
         x = self.end.lat - self.start.lat
