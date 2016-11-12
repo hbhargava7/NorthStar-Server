@@ -1,4 +1,5 @@
 import MapDataParser, math, sys
+import heapq
 
 data = MapDataParser.getNodesAndEdges()
 nodes = data[0]
@@ -20,9 +21,26 @@ def route(p1, p2):
 
 def findPath(start, end):
     path = []
+    heap = []
+    n = 0
+    for i in range(0, len(nodes)):
+        if nodes[i] == start:
+            n = i
+            break
+    for edge in edges[n]:
+        heapq.heappush(heap, edge)
+    while heap != [] or path[len(path) - 1] != end:
+        toAdd = (heapq.heappop(heap))
+        path.append(toAdd)
+        for edge in edges[findChildren(toAdd.node_to)]:
+            heapq.heappush(heap, edge)
 
     return path
 
+def findChildren(node):
+    for i in range(0, len(nodes)):
+        if nodes[i] == node:
+            return i
 
 def euclid(p1, p2):
     x = p1[0] - p2[0]

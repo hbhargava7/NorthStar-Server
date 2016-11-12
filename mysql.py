@@ -20,7 +20,9 @@ def populate():
 
 
 def pull(): 
-	
-	"""return a list of tuples of lat long for each crime"""
+	query = "SELECT latitude, longitude FROM crimes" 
+	tbl = x.execute(query) 
+	return tbl 
+
 
 populate()
