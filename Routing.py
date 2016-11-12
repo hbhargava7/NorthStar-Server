@@ -1,4 +1,3 @@
-from MapDataParser import euclid
 import MapDataParser, math, sys
 import Utils
 
@@ -22,22 +21,22 @@ class SearchNode:
 
 def route(p1, p2):
     startNode, endNode = None, None
-    bestDistFromStart, bestDistFromEnd = sys.maxint, sys.maxint
-    for node in nodes:
-        distFromStart = euclid(p1, nodes[node].point)
-        distFromEnd = euclid(p2, nodes[node].point)
+    bestDistFromStart, bestDistFromEnd = 999999999, 999999999
+    for id in nodes.keys():
+        distFromStart = Utils.euclid(p1, nodes[id].point)
+        distFromEnd = Utils.euclid(p2, nodes[id].point)
         if distFromStart < bestDistFromStart:
-            startNode = node
+            startNode = id
             bestDistFromStart = distFromStart
         if distFromEnd < bestDistFromEnd:
-            endNode = node
+            endNode = id
             bestDistFromEnd = distFromEnd
-    return findPath(startNode, endNode)
+    return findPath(nodes[startNode], nodes[endNode])
 
 def findPath(start, goal):
     visited = []
-    curr = start
-    fringe = util.PriorityQueue()
+    curr = SearchNode(start, goal)
+    fringe = Utils.PriorityQueue()
     fringe.push(curr, 0)
     while True:
         if fringe.isEmpty():
@@ -47,7 +46,7 @@ def findPath(start, goal):
             return createPath(curr)
         if curr.node not in visited:
             visited.append(curr.node)
-            children = edges[node.id]
+            children = edges[curr.node.id]
             if children:
                 for e in children:
                     cost = e.dist + curr.cost
