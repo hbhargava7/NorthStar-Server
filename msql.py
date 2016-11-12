@@ -10,14 +10,16 @@ x = conn.cursor()
 
 
 def populate(): 
-	query = "CREATE TABLE crimes (block_location_address offense eventtm eventdt latitude longitude);"
+	x.execute("DROP TABLE crimes;")
+	query = "CREATE TABLE crimes (block_location_address BLOB, offense BLOB, eventtm BLOB, eventdt BLOB, latitude BLOB, longitude BLOB);"
 	x.execute(query)
 	for dct in data.filteredCalls: 
 		for key in dct:
 			qmarks = ', '.join('?' * len(dct))
 			qry = "INSERT INTO crimes (%s) VALUES (%s)" % (qmarks, qmarks)
-			print(qry)
-			cursor.execute(qry, dct.keys() + dct.values())
+			print(dct.keys())
+			print(dct.values())
+			x.execute(qry, dct.keys(), dct.values())
 
 
 def pull(): 
