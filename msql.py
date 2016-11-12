@@ -1,20 +1,19 @@
 from threading import Thread
 import urllib 
 import re 
-import MySQLdb 
+import mysql.connector
 import data
 
 
-conn = mySQLdb.connect(host="ec2-54-218-21-50.us-west-2.compute.amazonaws.com:3306", user="root", passwd="adhksADHKS123!@#", db="world")
+conn = mysql.connector.connect(host="ec2-54-218-21-50.us-west-2.compute.amazonaws.com", user="Admin", passwd="CalHacks2016!", db="world")
 
-query = "INSERT INTO table_name (field) values ('value')" 
 x = conn.cursor()
-x.execute(query)
+query = "CREATE TABLE crimes (block_location_address offense eventtm eventdt block_location);"
 
-for dct in filteredCalls: 
+for dct in data.filteredCalls: 
 	for key in dct:
-		query = "INSERT INTO hello (" + str(key) + ") values (" + str(dct[key])
-		x = conn.cursor()
+		query = "INSERT INTO crimes (" + str(key) + ") values (" + str(dct[key]) + ")"
+		print (query)
 		x.execute(query)
 
 
