@@ -1,0 +1,19 @@
+import xmltodict
+
+def DataToDict(input):
+    with open(input) as data:
+        dict_data = xmltodict.parse(data.read())
+    return dict_data
+
+class Node:
+    def __init__(self, id, lat, lon):
+        self.id = id
+        self.lat = lat
+        self.lon = lon
+
+class Edge:
+    def __init__(self, node1, node2):
+        self.node1 = node1
+        self.node2 = node2
+
+print(DataToDict('map'))
