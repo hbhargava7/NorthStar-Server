@@ -17,8 +17,8 @@ class Edge:
         self.start = node_from
         self.end = node_to
         self.dist = Utils.euclid(self.start.point, self.end.point)
-        self.risk = risk 
-        self.calculateRisk()
+        self.risk = Utils.CrimeDensity(self.start.point, self.closeCrimes())
+        print (self.risk)
 
     def norm(self):
         x = self.end.lat - self.start.lat
@@ -38,10 +38,18 @@ class Edge:
         return points
 
     def calculateRisk(self):
-        curr = self.start.point
+        print ("calculateing risk")
+        risk = 0
         for (lat, lon) in self.segmentize():
-            print (Utils.euclid(curr , (lat, lon)))
-            curr = (lat, lon)
+            risk += Utils.CrimeDensity((lat, lon), CRIMES)
+        print (risk)
+
+    def closeCrimes(self):
+        close = []
+        for c in CRIMES:
+            if Utils.euclid(self.start.point, c) < 100 or Utils.euclid(self.end.point, c) < 100:
+                close.append(c)
+        return close
 
 def getNodesAndEdges():
     # nodes maps {ID:MapNode}
