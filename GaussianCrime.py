@@ -1,4 +1,8 @@
 from math import sqrt, pi, e
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib import cm
+
 # Give a point (lat, lon), and a list of crimes,
 # return the crime score for that point
 def CrimeDensity(point, crimes):
@@ -33,8 +37,20 @@ crimes = []
 for i in range(5, 10):
     for j in range(5, 10):
         crimes.append(Crime(i, j))
-
+X = []
+Y = []
+Z = []
+n = 0
 for i in range(15):
     for j in range(15):
-        print(str(round(CrimeDensity((i, j), crimes), 3)) + " | ", end = "")
-    print("")
+        crime = CrimeDensity((i, j), crimes)
+        print (crime)
+        n += 1
+        X.append(i)
+        Y.append(j)
+        Z.append(crime)
+
+fig = plt.figure()
+ax = fig.gca(projection='3d')
+ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=cm.coolwarm, linewidth=0, antialiased=False)
+plt.show()
