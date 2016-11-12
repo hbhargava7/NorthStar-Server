@@ -13,19 +13,22 @@ def filterDict(data, keys):
 
 	filtered = []
 
-	for dict in data: 
+	for d in data: 
 		temp = {}
-		for key, value in dict.items():
-			if (key in keys):
+		for key in keys:
+			if key in d:
+				value = d[key]
 				if (key == "block_location"):
-					longitude = value["coordinates"][0] * -1
+					longitude = value["coordinates"][0]
 					latitude = value["coordinates"][1]
 					temp["longitude"] = longitude
 					temp["latitude"] = latitude
 				else: 
 					temp[key] = value
-		filtered.append(temp)
-
+		if len(temp.keys()) == 6:
+			filtered.append(temp)
+		# else:
+		# 	print (d["caseno"])
 	return filtered
 
 
