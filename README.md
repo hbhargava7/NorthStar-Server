@@ -14,6 +14,6 @@ deactivate
 
 Dependencies
 ------------
-This toolset relies upon the following dependencies, which are intended to be fully managed by `virtualenv` and `pip` (see Configuration):
+This application relies upon the following dependencies, which are intended to be fully managed by `virtualenv` and `pip` (see Configuration):
 * `numpy` for general mathematical computations
 * `matplotlib` for graphics generation
