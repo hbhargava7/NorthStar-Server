@@ -7,8 +7,6 @@ def dataToDict(url):
     return data
 
 callsForService = dataToDict("callsForService.json")
-stopData = dataToDict("stopData.json")
-
 
 #Filters the dictionary so it only include releavent fields. 
 def filterDict(data, keys):
@@ -33,8 +31,4 @@ def filterDict(data, keys):
 
 keyCalls = ["block_location_address", "offense", "eventtm", "eventdt", "block_location"]
 filteredCalls = filterDict(callsForService, keyCalls)
-
-
-
-
 
