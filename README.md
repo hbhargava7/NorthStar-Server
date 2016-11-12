@@ -10,4 +10,10 @@ source virtualenvironment/bin/activate
 To exit the virtual environment:
 ```
 deactivate
-'''
+```
+
+Dependencies
+------------
+This toolset relies upon the following dependencies, which are intended to be fully managed by `virtualenv` and `pip` (see Configuration):
+* `numpy` for general mathematical computations
+* `matplotlib` for graphics generation
