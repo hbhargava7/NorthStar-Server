@@ -9,19 +9,22 @@ def dataToDict(url):
 callsForService = dataToDict("callsForService.json")
 stopData = dataToDict("stopData.json")
 
+
 #Filters the dictionary so it only include releavent fields. 
-def filterDict(data):
+def filterDict(data, keys):
 
 	filtered = []
-	keys = ["block_location_address", "offense", "eventtm", "eventdt", "block_location"]
+
 	for dict in data: 
 		temp = {k: v for k, v in dict.items() if k in keys}
 		filtered.append(temp)
 
 	return filtered
 
-filteredCalls = filterDict(callsForService)
-filteredStopData = filterDict(stopData)
-print(filteredCalls[0])
+
+keyCalls = ["block_location_address", "offense", "eventtm", "eventdt", "block_location"]
+filteredCalls = filterDict(callsForService, keyCalls)
+
+
 
 
