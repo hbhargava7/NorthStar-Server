@@ -21,7 +21,7 @@ def filterDict(data):
 	return filtered
 
 filteredCalls = filterDict(callsForService)
-filteredStopData = filteredDict(stopData)
-
+filteredStopData = filterDict(stopData)
+print(filteredCalls[0])
 
 
