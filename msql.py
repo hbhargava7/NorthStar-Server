@@ -5,7 +5,7 @@ import MySQLdb
 import data
 
 
-conn = mySQLdb.connect(host="host", user="user",password="password", db="dbname")
+conn = mySQLdb.connect(host="ec2-54-218-21-50.us-west-2.compute.amazonaws.com:3306", user="root", passwd="adhksADHKS123!@#", db="world")
 
 query = "INSERT INTO table_name (field) values ('value')" 
 x = conn.cursor()
