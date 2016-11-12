@@ -1,5 +1,5 @@
 import mysql.connector 
-import data
+import CrimeDataParser
 
 def populate(): 
 	db = mysql.connector.connect(host="ec2-54-218-21-50.us-west-2.compute.amazonaws.com", user="Admin", passwd="CalHacks2016!", db="berkeley_crimes")
@@ -7,7 +7,7 @@ def populate():
 	cursor.execute("DROP TABLE crimes;")
 	query = "CREATE TABLE crimes (block_location_address BLOB, offense BLOB, eventtm BLOB, eventdt BLOB, latitude BLOB, longitude BLOB);"
 	cursor.execute(query)
-	for dct in data.filteredCalls: 
+	for dct in CrimeDataParser.filteredCalls: 
 		qry = "INSERT INTO crimes (block_location_address, offense, eventtm, eventdt, latitude, longitude) VALUES (%(block_location_address)s, %(offense)s, %(eventtm)s, %(eventdt)s, %(latitude)s, %(longitude)s)"
 		cursor.execute(qry, dct)
 	db.commit()
