@@ -1,9 +1,9 @@
 from osmread import parse_file, Way, Node
 import math
-# import MySQLCrime
+import MySQLCrime
 import Utils
 
-# CRIMES = MySQLCrime.pull()
+CRIMES = MySQLCrime.pull()
 
 class MapNode:
     def __init__(self, id, lat, lon):
@@ -17,9 +17,9 @@ class Edge:
         self.start = node_from
         self.end = node_to
         self.dist = Utils.euclid(self.start.point, self.end.point)
-        # self.risk = Utils.CrimeDensity(self.start.point, self.closeCrimes())
+        self.risk = Utils.CrimeDensity(self.start.point, self.closeCrimes())
         # print (self.risk)
-        self.risk = 0
+        # self.risk = 0
 
     def norm(self):
         x = self.end.lat - self.start.lat
