@@ -42,7 +42,7 @@ def findPath(start, goal):
         if fringe.isEmpty():
             return []
         curr = fringe.pop()
-        if curr == goal:
+        if curr.isGoalState():
             return createPath(curr)
         if curr.node not in visited:
             visited.append(curr.node)
@@ -51,18 +51,20 @@ def findPath(start, goal):
                 for e in children:
                     cost = e.dist + curr.cost
                     node = SearchNode(e.end, goal, curr, cost)
-                    fringe.push(node, node.cost + Utils.euclid(curr.point, goal.point))
+                    fringe.push(node, node.cost + Utils.euclid(curr.node.point, goal.point))
 
 def createPath(node):
     path = []
     curr = node
-    while curr.prev:
-        path.append(curr.move)
+    while curr:
+        path.append(curr.node.point)
         curr = curr.prev
     path.reverse()
     return path
 
+
 start = (37.86979719999999, -122.2675821)
 goal = (37.8760221, -122.2588018)
 
-print (route(start, goal))
+for (x, y) in route(start, goal):
+    print(str(x) + ", " + str(y))

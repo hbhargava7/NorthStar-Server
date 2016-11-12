@@ -1,9 +1,12 @@
 from osmread import parse_file, Way, Node
 import math
-import MySQLCrime
+# import MySQLCrime
 import Utils
 
-CRIMES = MySQLCrime.pull()
+# CRIMES = MySQLCrime.pull()
+ALLOWED = ["motorway", "trunk", "primary", "secondary", "tertiary", "unclassified",\
+                    "residential", "living_street", "motorway_link", "trunk_link", "primary_link",\
+                    "secondary_link", "tertiary_link"]
 
 class MapNode:
     def __init__(self, id, lat, lon):
@@ -17,9 +20,9 @@ class Edge:
         self.start = node_from
         self.end = node_to
         self.dist = Utils.euclid(self.start.point, self.end.point)
-        self.risk = Utils.CrimeDensity(self.start.point, self.closeCrimes())
+        # self.risk = Utils.CrimeDensity(self.start.point, self.closeCrimes())
         # print (self.risk)
-        # self.risk = 0
+        self.risk = 0
 
     def norm(self):
         x = self.end.lat - self.start.lat
@@ -63,15 +66,22 @@ def getNodesAndEdges():
         if isinstance(entity, Node):
              node = MapNode(entity.id, entity.lat, entity.lon)
              nodes[entity.id] = node
-        if isinstance(entity, Way):
+        if isinstance(entity, Way) and 'highway' in entity.tags:
             path = entity.nodes
             for i in range(len(path)-1):
                 # dist = Utils.euclid(nodes[path[i]].point, nodes[path[i+1]].point)
                 edge = Edge(nodes[path[i]], nodes[path[i + 1]])
+                backEdge = Edge(nodes[path[i + 1]], nodes[path[i]])
                 if path[i] in edges:
                     edges[path[i]].append(edge)
                 else:
                     edges[path[i]] = [edge]
-    return (nodes, edges)
-
-getNodesAndEdges()
+                if path[i + 1] in edges:
+                    edges[path[i + 1]].append(backEdge)
+                else:
+                    edges[path[i + 1]] = [backEdge]
+    prunedNodes = dict()
+    for id in nodes.keys():
+        if id in edges:
+            prunedNodes[id] = nodes[id]
+    return (prunedNodes, edges)
