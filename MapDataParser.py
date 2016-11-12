@@ -16,14 +16,14 @@ class Edge:
     def __init__(self, node_from, node_to, risk=0):
         self.start = node_from
         self.end = node_to
-        self.dist = Utils.euclid(self.start, self.end)
+        self.dist = Utils.euclid(self.start.point, self.end.point)
         self.risk = risk 
         self.calculateRisk()
 
     def norm(self):
-        x = self.start.lat - self.end.lat
-        y = self.end.lon - self.end.lon
-        return (x / self.length, y / self.length)
+        x = self.end.lat - self.start.lat
+        y = self.end.lon - self.start.lon
+        return (x / self.dist, y / self.dist)
 
     # Return array of segmented points between 2 end points
     def segmentize(self):
@@ -31,15 +31,15 @@ class Edge:
         x = self.start.lat
         y = self.start.lon
         points = []
-        for i in range(floor(self.length)):
+        for i in range(math.floor(self.dist)):
             x += dx
             y += dy
-            points.append(x, y)
+            points.append((x, y))
         return points
 
     def calculateRisk(self):
-        curr = (self.start.lat, self.start.lon)
-        for (lat, lon) in self.segmentize:
+        curr = self.start.point
+        for (lat, lon) in self.segmentize():
             print (Utils.euclid(curr , (lat, lon)))
             curr = (lat, lon)
 
@@ -64,3 +64,5 @@ def getNodesAndEdges():
                 else:
                     edges[path[i]] = [edge]
     return (nodes, edges)
+
+getNodesAndEdges()
