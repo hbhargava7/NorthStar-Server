@@ -1,0 +1,3 @@
+argparse
+lxml
+protobuf==3.0.0b3
