@@ -1,6 +1,7 @@
 from osmread import parse_file, Way, Node
 import math
 import MySQLCrime
+from Utils import euclid
 
 CRIMES = MySQLCrime.pull()
 
@@ -17,16 +18,6 @@ class Edge:
         self.node_to = node_to
         self.dist = dist
         self.risk = risk
-
-# Haversine degree to meter conversion
-def euclid(p1, p2):
-    R = 6371 * 10e3 # km
-    dlon = math.radians(p2[1] - p1[1])
-    dlat = math.radians(p2[0] - p1[0])
-    a = math.sin(dlat/2) * math.sin(dlat/2) + math.cos(math.radians(p1[0])) * math.cos(math.radians(p2[0]))\
-                                              * math.sin(dlon/2) * math.sin(dlon/2)
-    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
-    return R * c
 
 def getNodesAndEdges():
     # nodes maps {ID:MapNode}
