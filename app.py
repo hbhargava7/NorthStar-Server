@@ -18,11 +18,11 @@ def processRoute(origin, destination):
 @app.route('/', methods=['POST'])
 def process():
 	data = request.get_data()
-	dictionary = json.load(data)
+	dictionary = json.loads(data.decode('utf-8'))
 	origin = (dictionary['originLatitude'], dictionary['originLongitude'])
 	destination = (dictionary['destinationLatitude'], dictionary['destinationLongitude'])
-	result = processRoute(origin, destination)
-	return flask.jsonify(result) 
+	result = processRoute(origin, destination) 
+	return flask.jsonify(result)
 
 app.run(host="0.0.0.0", port=int("80"))
 hello()
