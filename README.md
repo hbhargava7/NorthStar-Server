@@ -32,7 +32,10 @@ We route on a graph of Berkeley that takes into account the function above.
 Routing 
 -------
 Routing is done using A-star search. The function returns three different paths:
+
 Path of shortest length (ignoring risk)
+
 Safest path (weighing risk function heavily)
+
 Optimal path (weighing both distance to destination and risk intelligently)
 
