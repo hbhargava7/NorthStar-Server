@@ -10,7 +10,7 @@ def populate():
 											eventdt DATE, latitude DECIMAL(10, 8) NOT NULL, longitude DECIMAL(11, 8) NOT NULL);"
 	cursor.execute(query)
 	for dct in CrimeDataParser2.filteredCalls: 
-		qry = "INSERT INTO crimes (offense, eventtm, eventdt, latitude, longitude) \
+		qry = "INSERT INTO crimes2 (offense, eventtm, eventdt, latitude, longitude) \
 				VALUES (%(offense)s, %(eventtm)s, %(eventdt)s, %(latitude)s, %(longitude)s)"
 		cursor.execute(qry, dct)
 	db.commit()
@@ -23,7 +23,7 @@ def pull():
 	db = mysql.connector.connect(host="ec2-54-218-21-50.us-west-2.compute.amazonaws.com", 	
 								user="Admin", passwd="CalHacks2016!", db="berkeley_crimes")
 	cursor = db.cursor()
-	query = ("select latitude, longitude from crimes")
+	query = ("select latitude, longitude from crimes2")
 	cursor.execute(query)
 	toReturn = []
 	for (lat, lon) in cursor:
@@ -34,4 +34,3 @@ def pull():
 	return toReturn
 populate()
 print(pull())
-
