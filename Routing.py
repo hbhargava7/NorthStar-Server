@@ -51,7 +51,7 @@ def findPath(start, goal):
                 for e in children:
                     d = e.dist
                     risk = e.calculateRisk()
-                    print("distance: {}, risk: {}".format(d, risk))
+                    # print("distance: {}, risk: {}".format(d, risk))
                     cost = d + risk + curr.cost
                     node = SearchNode(e.end, goal, curr, cost)
                     fringe.push(node, node.cost + Utils.euclid(curr.node.point, goal.point))
@@ -59,16 +59,8 @@ def findPath(start, goal):
 def createPath(node):
     path = []
     curr = node
-    print ("cost: " + str(node.cost))
     while curr:
-        path.append(curr.node.point)
+        path.append([curr.node.point[0], curr.node.point[1]])
         curr = curr.prev
     path.reverse()
     return path
-
-
-start = (37.86979719999999, -122.2675821)
-goal = (37.8760221, -122.2588018)
-
-for (x, y) in route(start, goal):
-    print(str(x) + ", " + str(y))
