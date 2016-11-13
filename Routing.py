@@ -49,7 +49,7 @@ def findPath(start, goal, nodes, nodeEdges, risk):
                     d = e.dist
                     r = risk[e.id]
                     # print("distance: {}, r: {}".format(d, r))
-                    cost = d + r + curr.cost
+                    cost = r + curr.cost
                     node = SearchNode(e.other(curr.node), goal, curr, cost)
                     fringe.push(node, node.cost + Utils.euclid(curr.node.point, goal.point))
 
