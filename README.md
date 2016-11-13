@@ -22,4 +22,7 @@ This application relies upon the following dependencies, which are intended to b
 
 Crime Function
 --------------
+To find the crime risk at a particular location p, we look for crimes in a 100m radius and estimate a risk factor according to the equation:
 ![Gaussian Kernel](https://github.com/hbhargava7/NorthStar-Server/blob/master/images/Screen%20Shot%202016-11-13%20at%201.36.07%20AM.png)
+The risk along an edge of the graph is the integral over 1m segments along the edge. 
+We route on a graph of Berkeley that takes into account the function above. 
