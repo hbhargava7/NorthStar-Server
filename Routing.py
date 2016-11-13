@@ -60,4 +60,4 @@ def createPath(node):
         path.append([curr.node.point[0], curr.node.point[1]])
         curr = curr.prev
     path.reverse()
-    return path
+    return [path]

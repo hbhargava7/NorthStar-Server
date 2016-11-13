@@ -6,7 +6,7 @@ def dataToDict(url):
         data = json.load(data)
     return data
 
-crimes = dataToDict("crimes.json")
+crimes = dataToDict("data/crimes.json")
 
 #Filters the dictionary so it only include releavent fields. 
 def filterDict(data, keys):
@@ -27,11 +27,8 @@ def filterDict(data, keys):
 					temp[key] = value
 		if len(temp.keys()) == 6:
 			filtered.append(temp)
-		# else:
-		# 	print (d["caseno"])
 	return filtered
 
 
 keyCalls = ["block_location_address", "offense", "eventtm", "eventdt", "block_location"]
 filteredCalls = filterDict(crimes, keyCalls)
-

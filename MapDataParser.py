@@ -21,9 +21,6 @@ class Edge:
         self.n1 = n1
         self.n2 = n2
         self.dist = Utils.euclid(self.n1.point, self.n2.point)
-        # self.risk = Utils.CrimeDensity(self.n1.point, self.closeCrimes())
-        # print (self.risk)
-        # self.risk = 0
 
     def norm(self):
         x = self.n2.lat - self.n1.lat
@@ -71,7 +68,7 @@ def getNodesAndEdges():
     #edges {ID: Edge}
     edges = dict()
 
-    for entity in parse_file('map.osm'):
+    for entity in parse_file('data/map.osm'):
         if isinstance(entity, Node):
              node = MapNode(entity.id, entity.lat, entity.lon)
              nodes[entity.id] = node
