@@ -81,7 +81,7 @@ def getNodesAndEdges():
                 n1ID = path[i]
                 n2ID = path[i + 1]
                 edge = Edge(edgeID, nodes[n1ID], nodes[n2ID])
-                edges[edgeID] = edge
+                edges[edgeID+i] = edge
                 if n1ID in nodeEdges:
                     nodeEdges[n1ID].append(edge)
                 else:
