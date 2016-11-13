@@ -36,5 +36,8 @@ Data Collection and Routing
   * Path of shortest length (ignoring risk)
   * Safest path (weighing risk function heavily)
   * Optimal path (weighing both distance to destination and risk intelligently)
+* `Utils.py` for Crime Density function and Haversine conversion 
+  * The Haversine formula converts from degrees to meters, used for segmentation of edges:
+  * [Haversine](https://github.com/hbhargava7/NorthStar-Server/blob/master/images/Screen%20Shot%202016-11-13%20at%201.55.29%20AM.png)
 
 
