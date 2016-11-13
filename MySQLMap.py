@@ -1,5 +1,6 @@
 import mysql.connector 
 import MapDataParser
+from tqdm import tqdm
 
 def populate():
     nodes, nodeEdges, edges = MapDataParser.getNodesAndEdges()
@@ -8,13 +9,12 @@ def populate():
                                 user="Admin", passwd="CalHacks2016!", db="berkeley_crimes")
     cursor = db.cursor()
     cursor.execute("DROP TABLE edges;")
-    query = "CREATE TABLE edges (id BIGINT, risk DECIMAL(20, 5));"
+    query = "CREATE TABLE edges (id BIGINT, risk DECIMAL(10, 4));"
     cursor.execute(query)
-    for edgeID in edges:
+    for edgeID in tqdm(edges):
         risk = edges[edgeID].calculateRisk()
-        qry = "INSERT INTO edges (id, risk) \
-                VALUES (" + str(edgeID) + ", " + str(risk) + ")"
-        cursor.execute(qry)
+        qry = "INSERT INTO edges (id, risk) VALUES (%s, %s)"
+        cursor.execute(qry, (edgeID, risk))
 
     db.commit()
     cursor.close()

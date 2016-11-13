@@ -49,7 +49,7 @@ class Edge:
     def closeCrimes(self):
         close = []
         for c in CRIMES:
-            if Utils.euclid(self.n1.point, c) < 1000 or Utils.euclid(self.n2.point, c) < 1000:
+            if Utils.euclid(self.n1.point, c) < 100 or Utils.euclid(self.n2.point, c) < 100:
                 close.append(c)
         return close
 
