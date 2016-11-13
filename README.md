@@ -28,3 +28,11 @@ To find the crime risk at a particular location p, we look for crimes in a 100m 
 
 The risk along an edge of the graph is the integral over 1m segments along the edge. 
 We route on a graph of Berkeley that takes into account the function above. 
+
+Routing 
+-------
+Routing is done using A-star search. The function returns three different paths:
+Path of shortest length (ignoring risk)
+Safest path (weighing risk function heavily)
+Optimal path (weighing both distance to destination and risk intelligently)
+
