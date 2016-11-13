@@ -22,4 +22,4 @@ This application relies upon the following dependencies, which are intended to b
 
 Crime Function
 --------------
-Given a crime function $f(x)$
+![Gaussian Kernel](https://github.com/hbhargava7/NorthStar-Server/blob/master/images/Screen%20Shot%202016-11-13%20at%201.36.07%20AM.png)
