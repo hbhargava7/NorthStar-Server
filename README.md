@@ -20,4 +20,6 @@ This application relies upon the following dependencies, which are intended to b
 * `lxml` and `osmread` to read OpenStreetMap json files
 * `mysql` to set up database and retrieve relevant information
 
-
+Crime Function
+--------------
+Given a crime function $f(x)$
