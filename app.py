@@ -23,7 +23,7 @@ def processRoute(origin, destination):
 
 	temp = {}
 	temp['route'] = routes[1]
-	temp['description'] = 'Mix Path'
+	temp['description'] = 'Optimum Path'
 	temp['traveTime'] = ''
 	temp['safetyScore'] = 0
 	temp['originPlaceID'] = ''
@@ -37,7 +37,7 @@ def processRoute(origin, destination):
 	temp['safetyScore'] = 0
 	temp['originPlaceID'] = ''
 	temp['destinationPlaceID'] = ''
-	results.append(temp)
+	results['Safest Path'] = temp
 	return {"routes": results}
 
 @app.route('/', methods=['POST'])
