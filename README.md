@@ -31,6 +31,7 @@ We route on a graph of Berkeley that takes into account the function above.
 
 Data Collection and Routing 
 ---------------------------
+* Crime data from [Berkeley Open Data](https://data.cityofberkeley.info/Public-Safety/Berkeley-PD-Calls-for-Service/k2nh-s5h5)
 * `MapDataParser.py` for storage of nodes and edges in dictionaries, data from [OpenStreetMap](https://www.openstreetmap.org)
 * `Routing.py` for A-star search algorithm. The function returns three different paths:
   * Path of shortest length (ignoring risk)
