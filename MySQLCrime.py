@@ -33,19 +33,19 @@ def pull():
 	cursor.close()
 	db.close()
 	return toReturn
-
-def heatmap():
-    """return a list of tuples of lat long for each crime"""
-	db = mysql.connector.connect(host="ec2-54-218-21-50.us-west-2.compute.amazonaws.com", 	
-								user="Admin", passwd="CalHacks2016!", db="berkeley_crimes")
-	cursor = db.cursor()
-	query = ("select latitude, longitude, eventdt from crimes2")
-	cursor.execute(query)
-	toReturn = {}
-	for (lat, lon, crimeDate) in cursor:
-		# print("{}, {}".format(float(lat), float(lon)))
-		change = datetime.date.today() - crimeDate 
-		toReturn[(float(lat), float(lon))] = (180 - change) / 180.0
-	cursor.close()
-	db.close()
-	return toReturn
+#
+# def heatmap():
+# 	"""return a list of tuples of lat long for each crime"""
+# 	db = mysql.connector.connect(host="ec2-54-218-21-50.us-west-2.compute.amazonaws.com",
+# 								user="Admin", passwd="CalHacks2016!", db="berkeley_crimes")
+# 	cursor = db.cursor()
+# 	query = ("select latitude, longitude, eventdt from crimes2")
+# 	cursor.execute(query)
+# 	toReturn = {}
+# 	for (lat, lon, crimeDate) in cursor:
+# 		# print("{}, {}".format(float(lat), float(lon)))
+# 		change = datetime.date.today() - crimeDate
+# 		toReturn[(float(lat), float(lon))] = (180 - change) / 180.0
+# 	cursor.close()
+# 	db.close()
+# 	return toReturn

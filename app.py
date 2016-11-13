@@ -15,29 +15,29 @@ def processRoute(origin, destination):
 	temp = {}
 	temp['route'] = routes[0]
 	temp['description'] = 'Shortest Path'
-	temp['traveTime'] = ''
+	temp['travelTime'] = ''
 	temp['safetyScore'] = 0
 	temp['originPlaceID'] = ''
 	temp['destinationPlaceID'] = ''
-	results['Shortest Path'] = temp
+	results['fastestRoute'] = temp
 
 	temp = {}
 	temp['route'] = routes[1]
 	temp['description'] = 'Optimum Path'
-	temp['traveTime'] = ''
+	temp['travelTime'] = ''
 	temp['safetyScore'] = 0
 	temp['originPlaceID'] = ''
 	temp['destinationPlaceID'] = ''
-	results['optimum path'] = temp
+	results['optimalRoute'] = temp
 
 	temp = {}
 	temp['route'] = routes[2]
 	temp['description'] = 'Safest Path'
-	temp['traveTime'] = ''
+	temp['travelTime'] = ''
 	temp['safetyScore'] = 0
 	temp['originPlaceID'] = ''
 	temp['destinationPlaceID'] = ''
-	results['Safest Path'] = temp
+	results['safestRoute'] = temp
 	return {"routes": results}
 
 @app.route('/', methods=['POST'])
