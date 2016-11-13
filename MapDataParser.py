@@ -2,8 +2,8 @@ from osmread import parse_file, Way, Node
 import math
 # import MySQLCrime
 import Utils
+from crimes import CRIMES
 
-# CRIMES = MySQLCrime.pull()
 ALLOWED = ["motorway", "trunk", "primary", "secondary", "tertiary", "unclassified",\
                     "residential", "living_street", "motorway_link", "trunk_link", "primary_link",\
                     "secondary_link", "tertiary_link"]
@@ -22,7 +22,7 @@ class Edge:
         self.dist = Utils.euclid(self.start.point, self.end.point)
         # self.risk = Utils.CrimeDensity(self.start.point, self.closeCrimes())
         # print (self.risk)
-        self.risk = 0
+        # self.risk = 0
 
     def norm(self):
         x = self.end.lat - self.start.lat
@@ -42,16 +42,17 @@ class Edge:
         return points
 
     def calculateRisk(self):
-        print ("calculateing risk")
         risk = 0
-        for (lat, lon) in self.segmentize():
-            risk += Utils.CrimeDensity((lat, lon), CRIMES)
-        print (risk)
+        close = self.closeCrimes()
+        if close:
+            for (lat, lon) in self.segmentize():
+                risk += Utils.CrimeDensity((lat, lon), close)
+        return risk
 
     def closeCrimes(self):
         close = []
         for c in CRIMES:
-            if Utils.euclid(self.start.point, c) < 100 or Utils.euclid(self.end.point, c) < 100:
+            if Utils.euclid(self.start.point, c) < 1000 or Utils.euclid(self.end.point, c) < 1000:
                 close.append(c)
         return close
 
