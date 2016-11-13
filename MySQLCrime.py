@@ -32,5 +32,3 @@ def pull():
 	cursor.close()
 	db.close()
 	return toReturn
-populate()
-print(pull())

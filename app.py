@@ -12,15 +12,32 @@ risk = MySQLMap.pull()
 def processRoute(origin, destination):
 	routes = Routing.route(origin, destination, nodes, nodeEdges, risk)
 	results = []
-	for route in routes:
-		temp = {}
-		temp['route'] = route
-		temp['description'] = ''
-		temp['traveTime'] = ''
-		temp['safetyScore'] = 0
-		temp['originPlaceID'] = ''
-		temp['destinationPlaceID'] = ''
-		results.append(temp)
+	temp = {}
+	temp['route'] = routes[0]
+	temp['description'] = 'Shortest Path'
+	temp['traveTime'] = ''
+	temp['safetyScore'] = 0
+	temp['originPlaceID'] = ''
+	temp['destinationPlaceID'] = ''
+	results.append(temp)
+
+	temp = {}
+	temp['route'] = routes[1]
+	temp['description'] = 'Mix Path'
+	temp['traveTime'] = ''
+	temp['safetyScore'] = 0
+	temp['originPlaceID'] = ''
+	temp['destinationPlaceID'] = ''
+	results.append(temp)
+
+	temp = {}
+	temp['route'] = routes[2]
+	temp['description'] = 'Safest Path'
+	temp['traveTime'] = ''
+	temp['safetyScore'] = 0
+	temp['originPlaceID'] = ''
+	temp['destinationPlaceID'] = ''
+	results.append(temp)
 	return {"routes": results}
 
 @app.route('/', methods=['POST'])

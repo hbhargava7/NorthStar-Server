@@ -1,8 +1,9 @@
 from osmread import parse_file, Way, Node
 import math
-# import MySQLCrime
+import MySQLCrime
 import Utils
-from crimes import CRIMES
+
+CRIMES = MySQLCrime.pull()
 
 ALLOWED = ["motorway", "trunk", "primary", "secondary", "tertiary", "unclassified",\
                     "residential", "living_street", "motorway_link", "trunk_link", "primary_link",\
@@ -79,7 +80,7 @@ def getNodesAndEdges():
                 # dist = Utils.euclid(nodes[path[i]].point, nodes[path[i+1]].point)
                 n1ID = path[i]
                 n2ID = path[i + 1]
-                edge = Edge(edgeID, nodes[n1ID], nodes[n2ID])
+                edge = Edge(int(str(edgeID) + str(i)), nodes[n1ID], nodes[n2ID])
                 edges[int(str(edgeID) + str(i))] = edge
                 if n1ID in nodeEdges:
                     nodeEdges[n1ID].append(edge)
