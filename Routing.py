@@ -16,6 +16,9 @@ class SearchNode:
     def isGoalState(self):
         return self.node.id == self.goal.id
 
+    def __eq__(self, other):
+        self.node.id == other.node.id
+
 def route(p1, p2, nodes, nodeEdges, risk):
     startNode, endNode = None, None
     bestDistFromStart, bestDistFromEnd = 999999999, 999999999
@@ -49,7 +52,7 @@ def findPath(start, goal, nodes, nodeEdges, risk):
                     d = e.dist
                     r = risk[e.id]
                     # print("distance: {}, r: {}".format(d, r))
-                    cost = r + curr.cost
+                    cost = 0.1*d + r + curr.cost
                     node = SearchNode(e.other(curr.node), goal, curr, cost)
                     fringe.push(node, node.cost + Utils.euclid(curr.node.point, goal.point))
 
