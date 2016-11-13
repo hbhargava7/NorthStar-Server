@@ -1,5 +1,8 @@
 import json
 
+CRIMETYPES = ["ASSAULT/BATTERY FEL.","ASSAULT/BATTERY MISD.", "BRANDISHING", "BURGLARY RESIDENTIAL", "GUN/WEAPON", \
+			"ROBBERY", "SEXUAL ASSAULT FEL.", "SEXUAL ASSAULT MISD.", "THEFT FELONY (OVER $950)", "THEFT FROM PERSON", \
+			"THEFT MISD. (UNDER $950)"]
 #Converts the json data into a dictionary. 
 def dataToDict(url):
     with open(url) as data:
@@ -15,18 +18,19 @@ def filterDict(data, keys):
 
 	for d in data: 
 		temp = {}
-		for key in keys:
-			if key in d:
-				value = d[key]
-				if (key == "block_location"):
-					longitude = value["coordinates"][0]
-					latitude = value["coordinates"][1]
-					temp["longitude"] = longitude
-					temp["latitude"] = latitude
-				else: 
-					temp[key] = value
-		if len(temp.keys()) == 6:
-			filtered.append(temp)
+		if d["offense"] in CRIMETYPES:
+			for key in keys:
+				if key in d:
+					value = d[key]
+					if (key == "block_location"):
+						longitude = value["coordinates"][0]
+						latitude = value["coordinates"][1]
+						temp["longitude"] = longitude
+						temp["latitude"] = latitude
+					else: 
+						temp[key] = value
+			if len(temp.keys()) == 6:
+				filtered.append(temp)
 	return filtered
 
 

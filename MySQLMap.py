@@ -8,7 +8,7 @@ def populate():
                                 user="Admin", passwd="CalHacks2016!", db="berkeley_crimes")
     cursor = db.cursor()
     cursor.execute("DROP TABLE edges;")
-    query = "CREATE TABLE edges (id INT, risk DECIMAL(20, 5));"
+    query = "CREATE TABLE edges (id BIGINT, risk DECIMAL(20, 5));"
     cursor.execute(query)
     for edgeID in edges:
         risk = edges[edgeID].calculateRisk()

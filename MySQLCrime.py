@@ -30,7 +30,7 @@ def pull():
 	# end2 = datetime.time(6,0,0)
 	# query = ("SELECT latitude, longitude from crimes WHERE eventtm BETWEEN %s AND %s OR eventtm BETWEEN %s AND %s")
 	# cursor.execute(query, (start1, end1, start2, end2))
-	query = ("select latitude, longitude from crimes where offense LIKE '%ASSAULT%' or offense LIKE '%LARCENY%' or offense LIKE '%ROBBERY%' or offense LIKE '%SEX%'")
+	query = ("select latitude, longitude from crimes")
 	cursor.execute(query)
 	toReturn = []
 	for (lat, lon) in cursor:
@@ -39,3 +39,5 @@ def pull():
 	cursor.close()
 	db.close()
 	return toReturn
+
+populate()
