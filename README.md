@@ -33,7 +33,7 @@ Data Collection and Routing
 ---------------------------
 * Crime data from [Berkeley Open Data](https://data.cityofberkeley.info/Public-Safety/Berkeley-PD-Calls-for-Service/k2nh-s5h5)
 * `CrimeDataParser.py` for parsing data from Berkeley Open Data API
-* `CrimeDataParser2.py` for parsing json output fro Berkeley Open Data
+* `CrimeDataParser2.py` for parsing json output from Berkeley Open Data
 * `MapDataParser.py` for storage of nodes and edges in dictionaries, data from [OpenStreetMap](https://www.openstreetmap.org)
 * `Routing.py` for A-star search algorithm. The function returns three different paths:
   * Path of shortest length (ignoring risk)
