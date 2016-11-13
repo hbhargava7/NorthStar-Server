@@ -12,7 +12,7 @@ def CrimeDensity(point, crimes):
     # can capture more detail while large values of h lead to smoother
     # estimation. In other words, it is the analogue of the bin width of
     # a histogram. AKA higher h means a crime will have a bigger effect area.
-    h = 10
+    h = 1000
     # number of crimes
     n = len(crimes)
     score = 0

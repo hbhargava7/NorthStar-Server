@@ -1,6 +1,5 @@
 import mysql.connector 
 import CrimeDataParser
-import datetime
 
 def populate(): 
 	db = mysql.connector.connect(host="ec2-54-218-21-50.us-west-2.compute.amazonaws.com", \
@@ -24,12 +23,6 @@ def pull():
 	db = mysql.connector.connect(host="ec2-54-218-21-50.us-west-2.compute.amazonaws.com", 	
 								user="Admin", passwd="CalHacks2016!", db="berkeley_crimes")
 	cursor = db.cursor()
-	# start1 = datetime.time(20,0,0)
-	# end1 = datetime.time(23,59,59)
-	# start2 = datetime.time(0,0,0)
-	# end2 = datetime.time(6,0,0)
-	# query = ("SELECT latitude, longitude from crimes WHERE eventtm BETWEEN %s AND %s OR eventtm BETWEEN %s AND %s")
-	# cursor.execute(query, (start1, end1, start2, end2))
 	query = ("select latitude, longitude from crimes")
 	cursor.execute(query)
 	toReturn = []
