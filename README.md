@@ -12,14 +12,6 @@ To exit the virtual environment:
 deactivate
 ```
 
-Dependencies
-------------
-This application relies upon the following dependencies, which are intended to be fully managed by `virtualenv` and `pip` (see Configuration):
-* `numpy` for general mathematical computations
-* `matplotlib` for graphics generation and data visualization
-* `lxml` and `osmread` to read OpenStreetMap json files
-* `mysql` to set up database and retrieve relevant information
-
 Crime Function
 --------------
 To find the crime risk at a particular location p, we look for crimes in a 100m radius and estimate a risk factor according to the equation:
@@ -43,5 +35,13 @@ Data Collection and Routing
   * The Haversine formula converts from degrees to meters, used for segmentation of edges:
   
    ![Haversine](https://github.com/hbhargava7/NorthStar-Server/blob/master/images/Screen%20Shot%202016-11-13%20at%201.55.29%20AM.png)
+   
+Dependencies
+------------
+This application relies upon the following dependencies, which are intended to be fully managed by `virtualenv` and `pip` (see Configuration):
+* `numpy` for general mathematical computations
+* `matplotlib` for graphics generation and data visualization
+* `lxml` and `osmread` to read OpenStreetMap json files
+* `mysql` to set up database and retrieve relevant information
 
 
