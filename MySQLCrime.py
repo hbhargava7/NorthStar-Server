@@ -1,17 +1,17 @@
 import mysql.connector 
-import CrimeDataParser
+import CrimeDataParser2
 
 def populate(): 
 	db = mysql.connector.connect(host="ec2-54-218-21-50.us-west-2.compute.amazonaws.com", \
 								user="Admin", passwd="CalHacks2016!", db="berkeley_crimes")
 	cursor = db.cursor()
-	cursor.execute("DROP TABLE crimes;")
-	query = "CREATE TABLE crimes (block_location_address BLOB, offense BLOB, eventtm TIME, \
+	cursor.execute("DROP TABLE crimes2;")
+	query = "CREATE TABLE crimes2 (offense BLOB, eventtm TIME, \
 											eventdt DATE, latitude DECIMAL(10, 8) NOT NULL, longitude DECIMAL(11, 8) NOT NULL);"
 	cursor.execute(query)
-	for dct in CrimeDataParser.filteredCalls: 
-		qry = "INSERT INTO crimes (block_location_address, offense, eventtm, eventdt, latitude, longitude) \
-				VALUES (%(block_location_address)s, %(offense)s, %(eventtm)s, %(eventdt)s, %(latitude)s, %(longitude)s)"
+	for dct in CrimeDataParser2.filteredCalls: 
+		qry = "INSERT INTO crimes (offense, eventtm, eventdt, latitude, longitude) \
+				VALUES (%(offense)s, %(eventtm)s, %(eventdt)s, %(latitude)s, %(longitude)s)"
 		cursor.execute(qry, dct)
 	db.commit()
 	cursor.close()
@@ -33,4 +33,4 @@ def pull():
 	db.close()
 	return toReturn
 
-populate()
+print(pull())

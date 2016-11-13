@@ -12,14 +12,15 @@ keyCalls = ["block_location_address", "offense", "eventtm", "eventdt", "block_lo
 
 def parseData(): 
 	filtered = []
-	for crime in crimes: 
-		temp = {}
-		temp['offense'] = crime[9]
-		temp['eventtm'] = crime[11]
-		temp['eventdt'] = crime[10]
-		temp['longitude'] = crime[15][2]
-		temp['latitude'] = crime[15][1]
-		filtered.append(temp)
+	for crime in crimes:
+		if crime[9] and crime[11] and crime[10] and crime[15][2] and crime[15][1]:
+			temp = {}
+			temp['offense'] = crime[9]
+			temp['eventtm'] = crime[11]
+			temp['eventdt'] = crime[10]
+			temp['longitude'] = crime[15][2]
+			temp['latitude'] = crime[15][1]
+			filtered.append(temp)
 	return filtered
 
 filteredCalls = parseData() 
