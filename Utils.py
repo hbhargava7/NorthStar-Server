@@ -5,7 +5,6 @@ import heapq
 # return the crime score for that point
 def CrimeDensity(point, crimes):
     if not crimes:
-        print ("no crimes")
         return 0
     # The bandwidth h dictates the spread of the Gaussian kernel 
     # that is centered at each datapoint and hence, it controls 
@@ -13,13 +12,13 @@ def CrimeDensity(point, crimes):
     # can capture more detail while large values of h lead to smoother
     # estimation. In other words, it is the analogue of the bin width of
     # a histogram. AKA higher h means a crime will have a bigger effect area.
-    h = 10
+    h = 1000
     # number of crimes
     n = len(crimes)
     score = 0
     for c in crimes:
         score += (math.e ** (- (euclid(c, point) ** 2) / (2 * h * h))) / math.sqrt(2*math.pi)
-    return score / (n * h * h)
+    return score
 
 # # Find the euclidean distance between 2 points (lat, lon)
 # def distance(p1, p2):

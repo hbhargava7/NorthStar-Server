@@ -32,3 +32,4 @@ def pull():
 	cursor.close()
 	db.close()
 	return toReturn
+print(pull())
