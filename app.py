@@ -11,8 +11,8 @@ risk = MySQLMap.pull()
 
 def processRoute(origin, destination): 
 	result = {}
-	myRoute = route(origin, destination, nodes, nodeEdges, risk)
-	result['route'] = ''
+	myRoute = Routing.route(origin, destination, nodes, nodeEdges, risk)
+	result['route'] = myRoute
 	result['description'] = ''
 	result['traveTime'] = ''
 	result['safetyScore'] = 0
@@ -27,42 +27,10 @@ def process():
 	origin = (dictionary['originLatitude'], dictionary['originLongitude'])
 	destination = (dictionary['destinationLatitude'], dictionary['destinationLongitude'])
 	result = processRoute(origin, destination) 
-	return flask.jsonify(result)
+	return jsonify(result)
 
 app.run(host="0.0.0.0", port=int("80"))
-hello()
 
-
-
-# JSON INPUT
-# {
-#   "originPlaceID" : "ChIJ_TFLOS98hYARwTgvAjYUpjI",
-#   "originLongitude" : -122.258655,
-#   "destinationLatitude" : 37.8632322,
-#   "destinationLongitude" : -122.255017,
-#   "destinationPlaceID" : "ChIJcQI-nC18hYAROYFsz3rwV98",
-#   "originLatitude" : 37.867621
-# }
-
-# {
-# 	routes : [
-# 		{
-# 			description : string,
-# 			travelTime : string,
-# 			safetyScore : float,
-# 			timeScore : float,
-# 			originPlaceID : string,
-# 			destinationPlaceID : string,
-# 			route : [
-# 				[lat, long],
-# 				[lat, long],
-# 				[lat, long],
-# 				etc.
-# 			]
-# 		},
-# 		etc.
-# 	]
-# }
 
 
 
