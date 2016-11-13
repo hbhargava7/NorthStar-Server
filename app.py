@@ -11,7 +11,7 @@ risk = MySQLMap.pull()
 
 def processRoute(origin, destination):
 	routes = Routing.route(origin, destination, nodes, nodeEdges, risk)
-	results = []
+	results = {}
 	temp = {}
 	temp['route'] = routes[0]
 	temp['description'] = 'Shortest Path'
@@ -19,7 +19,7 @@ def processRoute(origin, destination):
 	temp['safetyScore'] = 0
 	temp['originPlaceID'] = ''
 	temp['destinationPlaceID'] = ''
-	results.append(temp)
+	results['Shortest Path'] = temp
 
 	temp = {}
 	temp['route'] = routes[1]
@@ -28,7 +28,7 @@ def processRoute(origin, destination):
 	temp['safetyScore'] = 0
 	temp['originPlaceID'] = ''
 	temp['destinationPlaceID'] = ''
-	results.append(temp)
+	results['optimum path'] = temp
 
 	temp = {}
 	temp['route'] = routes[2]

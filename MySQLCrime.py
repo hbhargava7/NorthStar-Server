@@ -32,3 +32,17 @@ def pull():
 	cursor.close()
 	db.close()
 	return toReturn
+
+def heatmap():
+    db = mysql.connector.connect(host="ec2-54-218-21-50.us-west-2.compute.amazonaws.com",   
+                                user="Admin", passwd="CalHacks2016!", db="berkeley_crimes")
+    cursor = db.cursor()
+    query = ("SELECT id, risk from edges2")
+    cursor.execute(query)
+    toReturn = {}
+    for (edgeID, risk) in cursor:
+        # print("{}, {}".format(float(lat), float(lon)))
+        toReturn[int(edgeID)] = float(risk)
+    cursor.close()
+    db.close()
+    return toReturn
