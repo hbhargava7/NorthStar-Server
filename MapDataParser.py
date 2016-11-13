@@ -16,24 +16,24 @@ class MapNode:
         self.point = (lat, lon)
 
 class Edge:
-    def __init__(self, node_from, node_to, risk=0):
-        self.start = node_from
-        self.end = node_to
-        self.dist = Utils.euclid(self.start.point, self.end.point)
-        # self.risk = Utils.CrimeDensity(self.start.point, self.closeCrimes())
+    def __init__(self, id, n1, n2):
+        self.id = id
+        self.n1 = n1
+        self.n2 = n2
+        self.dist = Utils.euclid(self.n1.point, self.n2.point)
+        # self.risk = Utils.CrimeDensity(self.n1.point, self.closeCrimes())
         # print (self.risk)
         # self.risk = 0
 
     def norm(self):
-        x = self.end.lat - self.start.lat
-        y = self.end.lon - self.start.lon
+        x = self.n2.lat - self.n1.lat
+        y = self.n2.lon - self.n1.lon
         return (x / self.dist, y / self.dist)
 
-    # Return array of segmented points between 2 end points
+    # Return array of segmented points between 2 n2 points
     def segmentize(self):
         (dx, dy) = self.norm()
-        x = self.start.lat
-        y = self.start.lon
+        (x, y) = self.n1.point
         points = []
         for i in range(math.floor(self.dist)):
             x += dx
@@ -43,24 +43,32 @@ class Edge:
 
     def calculateRisk(self):
         risk = 0
-        close = self.closeCrimes()
-        if close:
-            for (lat, lon) in self.segmentize():
-                risk += Utils.CrimeDensity((lat, lon), close)
+        # close = self.closeCrimes()
+        # if close:
+        #     for (lat, lon) in self.segmentize():
+        #         risk += Utils.CrimeDensity((lat, lon), close)
         return risk
 
     def closeCrimes(self):
         close = []
         for c in CRIMES:
-            if Utils.euclid(self.start.point, c) < 1000 or Utils.euclid(self.end.point, c) < 1000:
+            if Utils.euclid(self.n1.point, c) < 1000 or Utils.euclid(self.n2.point, c) < 1000:
                 close.append(c)
         return close
+
+    def other(self, curr):
+        if curr.id == self.n1.id:
+            return self.n2
+        return self.n1
 
 def getNodesAndEdges():
     # nodes maps {ID:MapNode}
     nodes = dict()
 
     #edges maps {ID:[Edge....]}
+    nodeEdges = dict()
+
+    #edges {ID: Edge}
     edges = dict()
 
     for entity in parse_file('map.osm'):
@@ -69,20 +77,23 @@ def getNodesAndEdges():
              nodes[entity.id] = node
         if isinstance(entity, Way) and 'highway' in entity.tags:
             path = entity.nodes
+            edgeID = entity.id
             for i in range(len(path)-1):
                 # dist = Utils.euclid(nodes[path[i]].point, nodes[path[i+1]].point)
-                edge = Edge(nodes[path[i]], nodes[path[i + 1]])
-                backEdge = Edge(nodes[path[i + 1]], nodes[path[i]])
-                if path[i] in edges:
-                    edges[path[i]].append(edge)
+                n1ID = path[i]
+                n2ID = path[i + 1]
+                edge = Edge(edgeID, nodes[n1ID], nodes[n2ID])
+                edges[edgeID] = edge
+                if n1ID in nodeEdges:
+                    nodeEdges[n1ID].append(edge)
                 else:
-                    edges[path[i]] = [edge]
-                if path[i + 1] in edges:
-                    edges[path[i + 1]].append(backEdge)
+                    nodeEdges[n1ID] = [edge]
+                if n2ID in nodeEdges:
+                    nodeEdges[n2ID].append(edge)
                 else:
-                    edges[path[i + 1]] = [backEdge]
+                    nodeEdges[n2ID] = [edge]
     prunedNodes = dict()
-    for id in nodes.keys():
-        if id in edges:
-            prunedNodes[id] = nodes[id]
-    return (prunedNodes, edges)
+    for nID in nodes.keys():
+        if nID in nodeEdges:
+            prunedNodes[nID] = nodes[nID]
+    return (prunedNodes, nodeEdges, edges)
