@@ -1,12 +1,12 @@
 import MapDataParser, math, sys
 import Utils
+import MySQLMap
 
 distWeight = 1
 riskWeight = 1
 
-data = MapDataParser.getNodesAndEdges()
-nodes = data[0]
-edges = data[1]
+nodes, nodeEdges, edges = MapDataParser.getNodesAndEdges()
+risk = MySQLMap.pull()
 
 class SearchNode:
     def __init__(self, node, goal, prev=None, cost=0):
@@ -46,14 +46,14 @@ def findPath(start, goal):
             return createPath(curr)
         if curr.node not in visited:
             visited.append(curr.node)
-            children = edges[curr.node.id]
+            children = nodeEdges[curr.node.id]
             if children:
                 for e in children:
                     d = e.dist
-                    risk = e.calculateRisk()
-                    # print("distance: {}, risk: {}".format(d, risk))
-                    cost = d + risk + curr.cost
-                    node = SearchNode(e.end, goal, curr, cost)
+                    r = risk[e.id]
+                    # print("distance: {}, r: {}".format(d, r))
+                    cost = d + r + curr.cost
+                    node = SearchNode(e.other(curr.node), goal, curr, cost)
                     fringe.push(node, node.cost + Utils.euclid(curr.node.point, goal.point))
 
 def createPath(node):
@@ -64,3 +64,6 @@ def createPath(node):
         curr = curr.prev
     path.reverse()
     return path
+
+for (x, y) in route((37.8698379, -122.2676349), (37.8762594, -122.258591)):
+    print (str(x) + ", " + str(y))
