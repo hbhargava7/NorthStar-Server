@@ -41,7 +41,7 @@ import MapDataParser
 #     plt.show()
 nodes, nodeEdges, edges = MapDataParser.getNodesAndEdges()
 risk = MySQLMap.pull()
-def route(a, b, c):
-    # print(Routing.route((37.862075, -122.262564), (37.8762594, -122.258591), nodes, nodeEdges, risk))
-    for (x, y) in Routing.route((37.865766, -122.267594), (37.872186, -122.268399), nodes, nodeEdges, risk, a, b, c)[0]:
+def route():
+    for (x, y) in Routing.route((37.8698379, -122.2676349), (37.8762594, -122.258591), nodes, nodeEdges, risk):
         print (str(x) + ", " + str(y))
+route()

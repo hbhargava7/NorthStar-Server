@@ -19,7 +19,7 @@ class SearchNode:
     def __eq__(self, other):
         self.node.id == other.node.id
 
-def route(p1, p2, nodes, nodeEdges, risk, a=1, b=1, c=1):
+def route(p1, p2, nodes, nodeEdges, risk):
     startNode, endNode = None, None
     bestDistFromStart, bestDistFromEnd = 999999999, 999999999
     for id in nodes.keys():
@@ -31,10 +31,10 @@ def route(p1, p2, nodes, nodeEdges, risk, a=1, b=1, c=1):
         if distFromEnd < bestDistFromEnd:
             endNode = id
             bestDistFromEnd = distFromEnd
-    return findPath(nodes[startNode], nodes[endNode], nodes, nodeEdges, risk, a, b, c)
+    return findPath(nodes[startNode], nodes[endNode], nodes, nodeEdges, risk)
 
-def findPath(start, goal, nodes, nodeEdges, risk, a, b, c):
-    visited = {}
+def findPath(start, goal, nodes, nodeEdges, risk):
+    visited = []
     curr = SearchNode(start, goal)
     fringe = Utils.PriorityQueue()
     fringe.push(curr, 0)
@@ -44,17 +44,17 @@ def findPath(start, goal, nodes, nodeEdges, risk, a, b, c):
         curr = fringe.pop()
         if curr.isGoalState():
             return createPath(curr)
-        if curr.node.id not in visited:
-            visited[curr.node.id] = None
+        if curr.node not in visited:
+            visited.append(curr.node)
             children = nodeEdges[curr.node.id]
             if children:
                 for e in children:
                     d = e.dist
                     r = risk[e.id]
                     # print("distance: {}, r: {}".format(d, r))
-                    cost = a*r + b*d + curr.cost
+                    cost = 0.1*d + r + curr.cost
                     node = SearchNode(e.other(curr.node), goal, curr, cost)
-                    fringe.push(node, node.cost + c*Utils.euclid(curr.node.point, goal.point))
+                    fringe.push(node, node.cost + Utils.euclid(curr.node.point, goal.point))
 
 def createPath(node):
     path = []

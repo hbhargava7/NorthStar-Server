@@ -1,9 +1,8 @@
 from osmread import parse_file, Way, Node
 import math
-import MySQLCrime
+# import MySQLCrime
 import Utils
-
-CRIMES = MySQLCrime.pull()
+from crimes import CRIMES
 
 ALLOWED = ["motorway", "trunk", "primary", "secondary", "tertiary", "unclassified",\
                     "residential", "living_street", "motorway_link", "trunk_link", "primary_link",\
