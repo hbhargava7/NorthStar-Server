@@ -34,7 +34,7 @@ def route(p1, p2, nodes, nodeEdges, risk):
     paths = []
     paths.append(findPath(nodes[startNode], nodes[endNode], nodes, nodeEdges, risk, 1, 0, 1))
     paths.append(findPath(nodes[startNode], nodes[endNode], nodes, nodeEdges, risk, 1, 100, 0.5))
-    paths.append(findPath(nodes[startNode], nodes[endNode], nodes, nodeEdges, risk, 0.01, 1, 0.01))
+    paths.append(findPath(nodes[startNode], nodes[endNode], nodes, nodeEdges, risk, 0.02, 10, 0.01))
     return paths
 
 def findPath(start, goal, nodes, nodeEdges, risk, a, b, c):
