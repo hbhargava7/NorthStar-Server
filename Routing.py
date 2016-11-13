@@ -5,9 +5,6 @@ import MySQLMap
 distWeight = 1
 riskWeight = 1
 
-nodes, nodeEdges, edges = MapDataParser.getNodesAndEdges()
-risk = MySQLMap.pull()
-
 class SearchNode:
     def __init__(self, node, goal, prev=None, cost=0):
         self.node = node
@@ -19,7 +16,7 @@ class SearchNode:
     def isGoalState(self):
         return self.node.id == self.goal.id
 
-def route(p1, p2):
+def route(p1, p2, nodes, nodeEdges, risk):
     startNode, endNode = None, None
     bestDistFromStart, bestDistFromEnd = 999999999, 999999999
     for id in nodes.keys():
@@ -31,9 +28,9 @@ def route(p1, p2):
         if distFromEnd < bestDistFromEnd:
             endNode = id
             bestDistFromEnd = distFromEnd
-    return findPath(nodes[startNode], nodes[endNode])
+    return findPath(nodes[startNode], nodes[endNode], nodes, nodeEdges, risk)
 
-def findPath(start, goal):
+def findPath(start, goal, nodes, nodeEdges, risk):
     visited = []
     curr = SearchNode(start, goal)
     fringe = Utils.PriorityQueue()
@@ -64,6 +61,3 @@ def createPath(node):
         curr = curr.prev
     path.reverse()
     return path
-
-for (x, y) in route((37.8698379, -122.2676349), (37.8762594, -122.258591)):
-    print (str(x) + ", " + str(y))

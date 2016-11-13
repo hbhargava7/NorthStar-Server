@@ -43,10 +43,10 @@ class Edge:
 
     def calculateRisk(self):
         risk = 0
-        # close = self.closeCrimes()
-        # if close:
-        #     for (lat, lon) in self.segmentize():
-        #         risk += Utils.CrimeDensity((lat, lon), close)
+        close = self.closeCrimes()
+        if close:
+            for (lat, lon) in self.segmentize():
+                risk += Utils.CrimeDensity((lat, lon), close)
         return risk
 
     def closeCrimes(self):

@@ -7,12 +7,12 @@ def populate():
     db = mysql.connector.connect(host="ec2-54-218-21-50.us-west-2.compute.amazonaws.com", \
                                 user="Admin", passwd="CalHacks2016!", db="berkeley_crimes")
     cursor = db.cursor()
-    # cursor.execute("DROP TABLE edges;")
+    cursor.execute("DROP TABLE edges;")
     query = "CREATE TABLE edges (id INT, risk DECIMAL(20, 5));"
     cursor.execute(query)
     for edgeID in edges:
         risk = edges[edgeID].calculateRisk()
-        qry = "INSERT INTO crimes (id, risk) \
+        qry = "INSERT INTO edges (id, risk) \
                 VALUES (" + str(edgeID) + ", " + str(risk) + ")"
         cursor.execute(qry)
 

@@ -1,12 +1,17 @@
 import json 
 import Routing
+import MySQLMap
+import MapDataParser
 from flask import Flask, render_template, jsonify, request
 
 app = Flask(__name__)
 
+nodes, nodeEdges, edges = MapDataParser.getNodesAndEdges()
+risk = MySQLMap.pull()
+
 def processRoute(origin, destination): 
 	result = {}
-	myRoute = route(origin, destination)
+	myRoute = route(origin, destination, nodes, nodeEdges, risk)
 	result['route'] = ''
 	result['description'] = ''
 	result['traveTime'] = ''
