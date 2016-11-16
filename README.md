@@ -9,6 +9,8 @@ This project was developed using `virtualenv` to manage Python dependencies. Env
 ```
 source virtualenvironment/bin/activate
 ```
+Note that there are substantial issues with the virtual environment at this point and you may be better served working without it for the time being. At present, any dependencies added must be installed manually on the server.
+
 The application uses `Flask` to manage RESTful queries, and the `Flask` server may be started by:
 ```
 set flask_app = app.py
